@@ -1,0 +1,21 @@
+size_t HashValue(string str)   
+{
+	size_t hash_value = 0;
+	for(const auto& i : str) {
+		hash_value = (hash_value << 5) + i; 
+	}	
+	return hash_value;   //not to `% table_size`
+}
+
+size_t StringMatching(string source,string target)
+{
+	size_t s_len = source.size();
+	size_t t_len = target.size();
+	size_t t_hash_value = HashValue(target);
+	for(size_t i = 0;i + t_len <= s_len;++i) {
+		string sub_str = source.substr(i,t_len);
+		if(HashValue(sub_str) == t_hash_value) {
+			return i;
+		}
+	}
+	return s_len;   
