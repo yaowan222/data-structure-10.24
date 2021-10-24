@@ -1,0 +1,15 @@
+int RandomInt(int lower, int upper)
+{
+	default_random_engine e(time(NULL));
+	uniform_int_distribution<int> u(lower, upper);
+	return u(e);
+}
+
+int main()
+{
+	Hash h(200);
+	for (size_t i = 0; i != 100; ++i) {
+		h.Insert(RandomInt(0, i));
+	}
+	return 0;
+}
